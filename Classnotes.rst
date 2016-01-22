@@ -11,7 +11,5 @@ Triple quotes indicate both value and type of variable
 
 so 
 
-x === 3;
-
-will read as false.
+x === 3; //will read as false.
 
