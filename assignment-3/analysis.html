@@ -1,0 +1,146 @@
+
+<html>
+<body>
+<script src="Seattle_Crime_Stats_2013.js"></script>
+
+<script>
+
+//alert(crime_stats.length);
+  
+    var index_month = 0;
+    var index_precincts = 1;
+    var index_crime = 2;
+    var index_count = 3;
+    
+    var month_names = ["January", "February", "March", "April", "May", "June", "July","August","September","October","November","December"];
+    
+    var crime_types = [];
+    var precincts = [];
+    var months = [];
+    
+    var homicide_by_month = [0,0,0,0,0,0,0,0,0,0,0,0];
+    var burglary_by_precinct = [0,0,0,0,0];
+    var assault_by_month = [0,0,0,0,0,0,0,0,0,0,0,0];
+    var totalBurglary = 0;
+    var totalAssault = 0;
+
+   
+     for (r in crime_stats) {
+
+// if (precints,indexOf(crime_stats[r][index_precincts]:
+//    precincts.push(crime_stats[r][index_precincts]);
+
+    
+    if (crime_stats[r][index_crime] == "Assault") {
+       totalAssault = crime_stats[r][index_count];
+
+       
+    }
+ }
+   
+   
+   for (r in crime_stats) {
+       
+
+    if (precincts.indexOf(crime_stats[r][index_precincts]) == -1) {
+    precincts.push(crime_stats[r][index_precincts]);
+
+
+        }
+   }
+   
+// check for precincts not needed in final outputs: document.write(precincts + "<br>");
+   
+   for (r in crime_stats) {
+       
+       
+    
+    if (crime_stats[r][index_crime] == "Burglary") {
+      totalBurglary += crime_stats[r][index_count];
+      
+      switch (crime_stats[r][index_precincts]) {
+      
+      case precincts[0]: 
+          burglary_by_precinct[0] += crime_stats[r][index_count];
+          var burglaryN = burglary_by_precinct[0];
+          break;
+     
+      case precincts[1]: 
+          burglary_by_precinct[1] += crime_stats[r][index_count];
+          var burglaryW = burglary_by_precinct[1];
+          break;
+
+      case precincts[2]: 
+          burglary_by_precinct[2] +=crime_stats[r][index_count];
+          var burglaryE = burglary_by_precinct[2];    
+          break;
+
+      case precincts[3]:
+          burglary_by_precinct[3] +=crime_stats[r][index_count];
+          var burglarySW = burglary_by_precinct[3];
+          break;
+
+      case precincts[4]:
+          burglary_by_precinct[4] +=crime_stats[r][index_count];
+          var burglarySE = burglary_by_precinct[4];
+          break;
+        
+          }
+            
+        }
+        
+  
+ }
+      
+        var max = 0;
+        var maxPrecinct ="";
+      
+       for (p in burglary_by_precinct) {
+            
+            if(burglary_by_precinct[p] > max){ 
+             
+            max=burglary_by_precinct[p];
+            maxPrecinct = precincts[p];
+        }
+       }
+        
+        var min = totalAssault;
+        var minMonth ="";
+      
+       for (m in assault_by_month) {
+            
+            if(assault_by_month[m] > min){ 
+             
+            min=assault_by_month[min];
+            minMonth = month[m];
+            document.write(min + "<br>");
+        }
+       }
+           
+
+  
+      
+   
+      document.writeln('Total burglaries in 2013 = ' + totalBurglary +". <br>");
+      document.write("Total burglaries in " + precincts[0] + " " + burglary_by_precinct[0] +". <br>");
+      document.write("Total burglaries in " + precincts[1] + " " + burglary_by_precinct[1] +". <br>");
+      document.write("Total burglaries in " + precincts[2] + " " + burglary_by_precinct[2] +". <br>");
+      document.write("Total burglaries in " + precincts[3] + " " + burglary_by_precinct[3] +". <br>");
+      document.write("Total burglaries in " + precincts[4] + " " + burglary_by_precinct[4] +". <br>");
+      document.write("The precinct with the highest burglaries is " + maxPrecinct + " with " + max + ". <br>");
+      document.write("The month with the lowest assaults is " + minMonth + " with " + min + ". <br>");
+    
+    //I found this solution on Stack Overflow, but I don't know why it works.
+    
+    var sum = 0;
+    for( var i = 0; i < burglary_by_precinct.length; i++ ){
+    sum += parseInt( burglary_by_precinct[i], 10 ); 
+        }
+    var avg = sum/burglary_by_precinct.length;
+
+    document.write("The average number of burglaries by precinct is: " + avg );
+
+       
+</script>
+</body>
+</html>
