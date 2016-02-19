@@ -1,0 +1,103 @@
+<html>
+    <style>
+        .asteroid {
+            position:absolute;
+            display:block;
+            background-color:cyan;
+            text-align:center;
+            width:20;
+            height:20;
+        }
+        
+        #box {
+            position:relative;
+            display:block;
+            width:500;
+            height:500;
+            background-color:#cccccc;
+             border-style: solid;
+            border-width: 1px;
+        }
+    </style>
+    <body>
+        <div id="box"></div>
+
+        <script>
+        
+        //The amount of time between movements
+            var velocity = 200; // milliseconds
+            
+        //The starting position of each box            
+            
+            //var asteroids = makeAsteroids();
+            
+            //for 
+            
+            //    {x:40, y:20, label:"X"},
+            //    {x:50, y:70, label:"Y"},
+            //    {x:50, y:70, label:"Z"}
+            //];
+            
+        
+            
+            var box = document.getElementById("box");
+            for (i=0; i<=26; i++) {
+                var asteroid = new makeAsteroid();
+                box.innerHTML += "<div class='asteroid' id='" + i + "' style='left:" +asteroid.x+ "px;top:" +asteroid.y+ "px;'>" +asteroid.label+ "</div>";
+            }
+            function shuffle() {
+                for (m in box.childNodes)
+                {
+                    move(m);
+                }
+            }
+            //How far the boxes move along each access as determined by the random function
+            
+            function move(n) {
+                var asteroid = document.getElementById(n);
+                if (!asteroid.dx) { asteroid.dx = getRandom(20,7); }
+                if (!asteroid.dy) { asteroid.dy = getRandom(1,9); }
+                
+                var currentLeft = parseInt(asteroid.style.left); 
+                if (currentLeft >= 490 || currentLeft <= 10) { asteroid.dx *= -1; }
+                asteroid.style.left = (currentLeft + asteroid.dx) + "px";
+                var currentTop = parseInt(asteroid.style.top); 
+                if (currentTop >= 490 || currentTop <= 10) { asteroid.dy *= -1; }
+                asteroid.style.top = (currentTop + asteroid.dy) + "px";
+            }
+            
+            function getRandom(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+            
+            function makeAsteroid() {
+              
+              this.asteroid = asteroid
+              this.x = getRandom(10, 400);
+              this.y = getRandom(10, 400);
+              this.label = randomString();
+              
+             
+            }
+            
+            
+            function randomString() {
+	            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+	            //var string_length = 1;
+	            //var randomstring = '';
+	            //for (var i=0; i<string_length; i++) {
+		        //var rnum = Math.floor(Math.random() * chars.length);
+		        //randomstring += chars.substring(rnum,rnum+1);
+		        return chars.charAt(getRandom(0,25));
+	        }
+	
+
+            
+            
+            
+            var myInterval = setInterval(shuffle, velocity);
+        </script>
+        
+    </body>
+    
+</html>

@@ -1,20 +1,15 @@
 
 <html>
 <body>
-<script src="Seattle_Crime_Stats_2013.js"></script>
+<script src="Seattle_Crime_Stats_2013_b.js"></script>
 
 <script>
 
 //alert(crime_stats.length);
   
-    var index_month = 0;
-    var index_precincts = 1;
-    var index_crime = 2;
-    var index_count = 3;
     
     var month_names = ["January", "February", "March", "April", "May", "June", "July","August","September","October","November","December"];
     
-    var crime_types = [];
     var precincts = [];
     var months = [];
     
@@ -25,32 +20,21 @@
     var totalAssault = 0;
 
    
-     for (r in crime_stats) {
+ //    for (var r in crime_stats) {
 
-// if (precints,indexOf(crime_stats[r][index_precincts]:
-//    precincts.push(crime_stats[r][index_precincts]);
+    
+    
 
-    if (crime_stats[r][index_crime] == "Homicide") {
-       var monthNum = crime_stats[r][index_month];
-       homicide_by_month[monthNum -1] += crime_stats[r][index_count];
-         }
-    
-    if (crime_stats[r][index_crime] == "Assault") {
-       var monthNum = crime_stats[r][index_month];
-       assault_by_month[monthNum -1] += crime_stats[r][index_count];
-         }
-    
        
- }
+   // }
+ 
    
-   //document.writeln('Homicide by month is = ' + homicide_by_month +". <br>");
-   //document.writeln('Assault by month is = ' + assault_by_month +". <br>");
    
    for (r in crime_stats) {
        
 
-    if (precincts.indexOf(crime_stats[r][index_precincts]) == -1) {
-    precincts.push(crime_stats[r][index_precincts]);
+    if (precincts.indexOf(crime_stats[r].precinct) == -1) {
+    precincts.push(crime_stats[r].count);
 
 
         }
@@ -60,37 +44,39 @@
    
    for (r in crime_stats) {
        
-    if (crime_stats[r][index_crime] == "Assault") {
-      totalAssault += crime_stats[r][index_count]; 
+    if (crime_stats[r].crime == "Assault") {
+       totalAssault = crime_stats[r].count;
+       
     }
     
-    if (crime_stats[r][index_crime] == "Burglary") {
-      totalBurglary += crime_stats[r][index_count];
+    if (crime_stats[r].crime == "Burglary") {
+      totalBurglary += crime_stats[r].count;
       
-      switch (crime_stats[r][index_precincts]) {
+      
+      switch (crime_stats[r].precinct) {
       
       case precincts[0]: 
-          burglary_by_precinct[0] += crime_stats[r][index_count];
+          burglary_by_precinct[0] += crime_stats[r].count;
           var burglaryN = burglary_by_precinct[0];
           break;
      
       case precincts[1]: 
-          burglary_by_precinct[1] += crime_stats[r][index_count];
+          burglary_by_precinct[1] += crime_stats[r].count;
           var burglaryW = burglary_by_precinct[1];
           break;
 
       case precincts[2]: 
-          burglary_by_precinct[2] +=crime_stats[r][index_count];
+          burglary_by_precinct[2] +=crime_stats[r].count;
           var burglaryE = burglary_by_precinct[2];    
           break;
 
       case precincts[3]:
-          burglary_by_precinct[3] +=crime_stats[r][index_count];
+          burglary_by_precinct[3] +=crime_stats[r].count;
           var burglarySW = burglary_by_precinct[3];
           break;
 
       case precincts[4]:
-          burglary_by_precinct[4] +=crime_stats[r][index_count];
+          burglary_by_precinct[4] +=crime_stats[r].count;
           var burglarySE = burglary_by_precinct[4];
           break;
         
@@ -118,11 +104,11 @@
       
        for (m in assault_by_month) {
             
-            if(assault_by_month[m] < min){ 
+            if(assault_by_month[m] > min){ 
              
-            min=assault_by_month[m];
-            minMonth = month_names[m];
-            //document.write(min + "<br>");
+            min=assault_by_month[min];
+            minMonth = month[m];
+            document.write(min + "<br>");
         }
        }
            
@@ -131,13 +117,13 @@
       
    
       document.writeln('Total burglaries in 2013 = ' + totalBurglary +". <br>");
+      document.writeln('Total assaults in 2013 = ' + totalAssault +". <br>");
       document.write("Total burglaries in " + precincts[0] + " " + burglary_by_precinct[0] +". <br>");
       document.write("Total burglaries in " + precincts[1] + " " + burglary_by_precinct[1] +". <br>");
       document.write("Total burglaries in " + precincts[2] + " " + burglary_by_precinct[2] +". <br>");
       document.write("Total burglaries in " + precincts[3] + " " + burglary_by_precinct[3] +". <br>");
       document.write("Total burglaries in " + precincts[4] + " " + burglary_by_precinct[4] +". <br>");
       document.write("The precinct with the highest burglaries is " + maxPrecinct + " with " + max + ". <br>");
-      document.writeln('Total assaults in 2013 = ' + totalAssault +". <br>");
       document.write("The month with the lowest assaults is " + minMonth + " with " + min + ". <br>");
     
     //I found this solution on Stack Overflow, but I don't know why it works.

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Events & validation</h1>
+
+<form id="form1" action="#" onsubmit="return validateForm(this);">
+  name: <input type="text" name="name"><br>
+  password: <input type="text" name="password"><br>
+
+  <button >Check</button>
+</form>
+
+<hr><div id="message"></div>
+
+<script>
+function validateForm(myForm) {
+  var answer = document.getElementById("message");
+  
+  if (myForm.password.length <= 8){
+    
+    answer.innerHTML = "Too short.";
+  }
+  
+  //answer.innerHTML = myForm.name.value;
+  return false; // prevent page reload
+}
+</script>
+
+</body>
+</html>

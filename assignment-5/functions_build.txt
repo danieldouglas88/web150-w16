@@ -1,0 +1,14 @@
+define and invoke a function that:
+    takes no parameters
+    
+    takes a least one numer parameter and returns a calculated value using a local variable defined within
+ the function
+ 
+    sorts and array of numbers in descending order
+    
+    validates a password for length
+    
+    validates a US 5 digit zip code
+    
+    generates complex html formatting for an array of data items
+ 
