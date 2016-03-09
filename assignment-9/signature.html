@@ -22,6 +22,7 @@
     		var clickY = new Array();
     		var clickDrag = new Array();
     		var paint;
+    		var sigData;
     		
     		canvas.addEventListener("mousedown", mouseDown, false);
             	canvas.addEventListener("mousemove", mouseXY, false);
@@ -53,6 +54,7 @@
     		$("#saveSig").click(function saveSig() {
         		var sigData = canvas.toDataURL("image/png");
         		$("#imgData").text(sigData);
+        		return sigData;
     		});
     		
     		//Clear the Sig
@@ -66,10 +68,12 @@
 		});
 		
 		//Print the Sig
-    		$("#printSig").click(function printSig() {
-        		ctx.drawImage(sigData,0,0);
+    		$("#printSig").click(
+    		   function printSig() {
+        	   	
         			
     		});
+    		
 		function addClick(x, y, dragging) {
         		clickX.push(x);
         		clickY.push(y);
