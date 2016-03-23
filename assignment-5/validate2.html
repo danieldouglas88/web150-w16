@@ -1,0 +1,134 @@
+<html>
+<body>
+
+<form id="myForm" method="POST" action="#">
+	<p>First name: <input id="field_firstname" title="First name must not be blank and contain only UPPER/lowercase characters" type="text" required pattern="[a-zA-Z]+" name="firstname"></p>
+	<p>Last name: <input id="field_lastname" title="Last name must not be blank and contain only UPPER/lowercase characters" type="text" required pattern="[a-zA-Z]+" name="lastname"></p>
+  <p>Password: <input id="field_pwd1" title="Password must contain at least 8 characters, including UPPER/lowercase, a symbol and a number. No white space allowed." type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}" name="pwd1"></p>
+  <p>Confirm Password: <input id="field_pwd2" title="Please enter the same Password as above." type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}" name="pwd2"></p>
+	<p><input type="submit" value="Submit"></p>
+</form>
+
+<script type="text/javascript">
+
+  document.addEventListener("DOMContentLoaded", function() {
+
+    // JavaScript form validation
+
+    var checkPassword = function(str)
+    {
+      var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+      //Password between 8 and 15 characters; must contain at least one 
+      //lowercase letter, one uppercase letter, one numeric digit, and one 
+      //special character, but cannot contain whitespace.
+      return re.test(str);
+    };
+
+    var checkForm = function(e)
+    {
+      if(this.firstname.value == "") {
+        alert("Error: First name cannot be blank!");
+				console.log("Error: First name cannot be blank!");
+        this.firstname.focus();
+        e.preventDefault(); // equivalent to return false
+        return;
+      }
+      re = /^[a-zA-Z]+$/;
+      if(!re.test(this.firstname.value)) {
+        alert("Error: First name must contain only letters!");
+				console.log("Error: First name must contain only letters!");
+        this.firstname.focus();
+        e.preventDefault();
+        return;
+      }
+      if(this.lastname.value == "") {
+        alert("Error: Last name cannot be blank!");
+				console.log("Error: First name cannot be blank!");
+        this.lastname.focus();
+        e.preventDefault(); // equivalent to return false
+        return;
+			}
+      re = /^[a-zA-Z]+$/;
+      if(!re.test(this.lasttname.value)) {
+        alert("Error: Last name must contain only letters!");
+				console.log("Error: Last name must contain only letters!");
+        this.lasttname.focus();
+        e.preventDefault(); // equivalent to return false
+        return;
+      }
+      if(this.pwd1.value != "" && this.pwd1.value === this.pwd2.value) {
+        if(!checkPassword(this.pwd1.value)) {
+          alert("The password you have entered is not valid!");
+					console.log("The password you have entered is not valid!");
+          this.pwd1.focus();
+          e.preventDefault(); // equivalent to return false
+          return;
+        }
+      } else {
+        alert("Error: Please check that you've entered and confirmed your password!");
+				console.log("Error: Please check that you've entered and confirmed your password!");
+        this.pwd1.focus();
+        e.preventDefault(); // equivalent to return false
+        return;
+      }
+      
+      alert("First name, last name and password have been validated");
+			//console.log("First name, last name and password have been validated");
+    };
+
+    var myForm = document.getElementById("myForm");
+    myForm.addEventListener("submit", checkForm, true);
+
+    // HTML5 form validation
+
+    var supports_input_validity = function()
+    {
+      var i = document.createElement("input");
+      return "setCustomValidity" in i;
+    }
+
+    if(supports_input_validity()) {
+      var firstnameInput = document.getElementById("field_firstname");
+      firstnameInput.setCustomValidity(firstnameInput.title);
+			
+      var lastnameInput = document.getElementById("field_lastname");
+      lastnameInput.setCustomValidity(lastnameInput.title);
+      
+			var pwd1Input = document.getElementById("field_pwd1");
+      pwd1Input.setCustomValidity(pwd1Input.title);
+
+      var pwd2Input = document.getElementById("field_pwd2");
+
+      // input key handlers
+
+      firstnameInput.addEventListener("keyup", function() {
+        firstnameInput.setCustomValidity(this.validity.patternMismatch ? firstnameInput.title : "");
+      }, false);
+
+      lastnameInput.addEventListener("keyup", function() {
+        lastnameInput.setCustomValidity(this.validity.patternMismatch ? lastnameInput.title : "");
+      }, false);
+      
+			pwd1Input.addEventListener("keyup", function() {
+        this.setCustomValidity(this.validity.patternMismatch ? pwd1Input.title : "");
+        if(this.checkValidity()) {
+          pwd2Input.pattern = this.value;
+          pwd2Input.setCustomValidity(pwd2Input.title);
+        } else {
+          pwd2Input.pattern = this.pattern;
+          pwd2Input.setCustomValidity("");
+        }
+      }, false);
+
+      pwd2Input.addEventListener("keyup", function() {
+        this.setCustomValidity(this.validity.patternMismatch ? pwd2Input.title : "");
+      }, false);
+
+    }
+
+  }, false);
+
+</script>
+
+</body>
+</html>

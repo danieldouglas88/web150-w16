@@ -1,0 +1,37 @@
+</html><!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    </head>
+<body>
+
+
+<form id="myForm" action="#" onsubmit="return validateForm(this);">
+    <table>        
+        <tr><td>Name:</td><td> <input type="text" name="name" required></td></tr>
+        <tr><td>Age:</td><td> <input type="text" age="age" pattern="^(0?[1-9]|[1-9][0-9])$" required></td></tr>
+        <tr><td>Phone:</td><td> <input type="tel" phone="phone" pattern="\S{10}$" required></td></tr>
+        <tr><td>Zip:</td><td> <input type="text" name="zip" pattern="(^\d{5}$)|(^\d{5}-\d{4}$)" required></td></tr>
+        <tr><td>Password:</td><td> <input type="text" name="password" pattern="^(?=.*\d)(?=.*[~!@#$%^&*()_\-+=|\\{}[\]:;<>?/})(?=.*[A-Z])(?=.[a-z])\S{8,15}$" required></td></tr>
+</table>    
+  <button >Check</button>
+</form>
+
+<script>
+$/('form button, form input[type=submit]').on('click', function(e) {
+  //cancel the normal form submission behavior
+  e.preventDefault();
+  //gather up the form's values
+  var form = $('form');
+  console.log("I'm working");
+}); 
+
+ 
+ 
+</script>
+
+</body>
+
+</html>
+Status API Training Shop Blog About Pricing
+© 2016 GitHub, Inc. T
