@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    </head>
+<body>
+	<canvas id="canvas" width="500" height="500" style="border: 1px solid #0000"></canvas>
+    
+<script>
+
+
+ window.requestAnimationFrame(draw);   
+
+function draw() {
+    
+     
+  var ctx = document.getElementById('canvas').getContext('2d');
+
+  ctx.moveTo(20, 20);
+  ctx.lineTo(100, 20);     
+  ctx.stroke();
+
+
+    ctx.moveTo(200, 20);
+    ctx.lineTo(200, 200);     
+    ctx.lineTo(300, 200);     
+   
+    ctx.lineTo(300, 20);     
+    ctx.lineTo(200, 20);
+    ctx.stroke();
+    
+   
+   ctx.fillStyle = "red";
+   ctx.fillRect(200, 400, 50, 50);
+   
+  
+
+  ctx.beginPath();
+  ctx.arc(75,75,35,0,Math.PI);
+  ctx.strokeStyle = 'rgba(0,153,255,0.4)';
+  ctx.stroke();  
+    
+    
+    
+  var time = new Date();
+  ctx.rotate( ((2*Math.PI)/60)*time.getMinutes() + ((50*Math.PI)/60000)*time.getMilliseconds() );
+  ctx.translate(105,0);
+  ctx.fillStyle = 'blue';
+  ctx.fillRect(30, 400, 50, 50);
+ ctx.restore();    
+  
+  window.requestAnimationFrame(draw);
+   
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+
+    
+</html>
