@@ -3,22 +3,51 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     </head>
     <style>
+        
+        
         .over {
-            background-color: blue;
+            background-color: skyblue;
         }
         
         .selected {
-            background-color: green;
-        }    
-        .odd {
-            background-color: light yellow;
+            background-color: yellow;
+        } 
+        
+        table {
+        
+        border: 1px solid black;
+        }
+                 
+        th, td {
+        border: 1px solid black;
+        text-align:center;
+        }
+        
+        th {
+            
+        background-color: lightgray;
+        }
+    
+        th, td {
+   
+        padding: 10px;
+        
+        }
+            
+        .oddRows {
+    
+        background-color: lightgray;
+        
         }
         
     </style>
+   
     <body>
-        <div id="roles"></div>
-        <table border='1'><tr><th>Name</th><th>Role</th><th>House</th><th>Gender</th><th>Aligns</td><tr></table>
 
+        <div id="buttons"></div>
+        <table><tr class="tableHeader"><th>Name</th><th>Role</th><th>House</th><th>Gender</th><th>Alignment</td><tr></table>
+        <div id="resetbelow"></div>
+        
     </body>
         
         <script>
@@ -40,22 +69,74 @@
         {name:"Dobby", role:"", house:"",gender:"?",alignment:"good"}
         ];
         
-        // buttons
+        // buttons for sort categories
+            
+            
+        //arrays for the categories
         var roles = [];
+        var houses = [];
+        var genders = [];    
+        var alignments = [];    
+                
         for (row in characters) {
+            
             var role = characters[row].role;
             if (role && roles.indexOf(role) == -1) {
                 roles.push(role);
             } 
-        }
-        for (row in roles) {
-            $("#roles").append("<button>" +roles[row]+ "</button>");
+                 
+        var house = characters[row].house;
+            if (house && houses.indexOf(house) == -1)  {
+                houses.push(house);
+            }
+         
+        var gender = characters[row].gender;
+            if (gender && genders.indexOf(gender) == -1)  {
+                genders.push(gender);
+            }
+        
+        var alignment = characters[row].alignment;
+            if (alignment && alignments.indexOf(alignment) == -1)  {
+                alignments.push(alignment);
+            }
         }
         
+        
+        
+        //buttons for each item in the array at the top of the table
+            
+        for (row in roles) {
+            $("#buttons").append("<button>" +roles[row]+ "</button>"); 
+        }
+        for (row in houses) {
+            $("#buttons").append("<button>" +houses[row]+ "</button>");
+        }    
+        
+        for (row in genders) {
+            $("#buttons").append("<button>" +genders[row]+ "</button>");
+        }        
+            
+            
+        for (row in alignments) {
+            $("#buttons").append("<button>" +alignments[row]+ "</button>");
+        }
+        
+    //the data table
+            
         for (row in characters) {
             $("table").append("<tr><td>" +characters[row].name+ "</td><td>" +characters[row].role+ "</td><td>" +characters[row].house+ "</td><td>" +characters[row].gender+ "</td><td>" +characters[row].alignment+ "</td></tr>");
         }
+    
+    //rest button underneath the table
+    $("#resetbelow").append("<button>Clear All Selections</button>");    
+            
+     
+        
         $(document).ready(function(){
+        
+        
+        //Make the buttons do stuff
+        
             var buttons = $('button');
             buttons.on('mouseenter', function(e) {
                 var $this = $(this);
@@ -70,13 +151,55 @@
             buttons.on('click', function() {
                 $(".selected").removeClass("selected");
                 var $this = $(this);
+                
+                if($this.text() == "Clear All Selections"){
+                    resetRows();
+                }else
+                
+                {
+            
                 $this.addClass("selected");
                 toggleRows($this.text());
+                }
             });
+        
+        
+        $("tr:odd").addClass("oddRows");
+        
         });
-        function toggleRows(text) {
-            var rows = $("tr").filter(":not(:contains('" + text + "'))" );
-            // your code here
+        
+       //choose rows to hide
+        function toggleRows(text){
+        $("tr:odd").removeClass("oddRows");    
+        var rows = $("tr").has("td").not(":contains('" + text + "')" );
+        if(!rows[0].hidden){
+        rows.hide();
         }
+        
+        else {
+            rows.show();
+        }
+        
+        $("tr:visible").filter(":odd").addClass("oddRows");
+        
+        }
+       
+        
+        //reset all the rows
+        function resetRows(text) {
+        $("tr:odd").removeClass("oddRows");            
+        $("tr:hidden").remove("hidden");
+        $("tr:visible:odd").addClass("oddRows");
+            
+        }
+
+        //make every other visible row shaded with each selection/clear
+        function rowFormatting(oddRows) {
+        $("tr:visible:odd").addClass("oddRows");    
+        }    
+        
+            
+            
+            
         </script>
 </html>
