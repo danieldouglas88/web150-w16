@@ -164,7 +164,7 @@
             });
         
         
-        $("tr:odd").addClass("oddRows");
+        $("tr:visible:odd").addClass("oddRows");
         
         });
         
@@ -188,7 +188,7 @@
         //reset all the rows
         function resetRows(text) {
         $("tr:odd").removeClass("oddRows");            
-        $("tr:hidden").remove("hidden");
+        $("tr").show();
         $("tr:visible:odd").addClass("oddRows");
             
         }
