@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</head>
+<body>
+
+<h1>Random Dealer</h1>
+
+<form id="form1" action="#" onsubmit="return randomDealer();">
+
+  <button>Try it.</button>
+</form>
+    <h3 id="m2"> </h3>
+    <hr><div id="message">Oi mate, this program spits out random card objects.</div>
+    <div id="message2"> </div>
+    <div id="message3"> </div>
+    <div id="message4"> </div>
+    <div id="message5"> </div>
+    
+    <script>
+        
+function randomDealer() {
+
+var cards = [ {value: "Ace", suit: "Clubs"}, {value: "Ace", suit: "Diamonds"}, {value: "Ace", suit: "Hearts"}, {value: "Ace", suit: "Spades"}, {value: 8, suit: "Clubs"}, {value: 8, suit: "Diamonds"}, {value: 8, suit: "Hearts"}, {value: 8, suit: "Spades"}, {value: 5, suit: "Clubs"}, {value: 5, suit: "Diamonds"}, {value: 5, suit: "Hearts"}, {value: 5, suit: "Spades"}, {value: 4, suit: "Clubs"}, {value: 4, suit: "Diamonds"}, {value: 4, suit: "Hearts"}, {value: 4, suit: "Spades"}, {value: "Jack", suit: "Clubs"}, {value: "Jack", suit: "Diamonds"}, {value: "Jack", suit: "Hearts"}, {value: "Jack", suit: "Spades"}, {value: "King", suit: "Clubs"}, {value: "King", suit: "Diamonds"}, {value: "King", suit: "Hearts"}, {value: "King", suit: "Spades"}, {value: 9, suit: "Clubs"}, {value: 9, suit: "Diamonds"}, {value: 9, suit: "Hearts"}, {value: 9, suit: "Spades"}, {value: "Queen", suit: "Clubs"}, {value: "Queen", suit: "Diamonds"}, {value: "Queen", suit: "Hearts"}, {value: "Queen", suit: "Spades"}, {value: 6, suit: "Clubs"}, {value: 7, suit: "Diamonds"}, {value: 7, suit: "Hearts"}, {value: 7, suit: "Spades"}, {value: 6, suit: "Clubs"}, {value: 6, suit: "Diamonds"}, {value: 6, suit: "Hearts"}, {value: 6, suit: "Spades"}, {value: 10, suit: "Clubs"}, {value: 10, suit: "Diamonds"}, {value: 10, suit: "Hearts"}, {value: 10, suit: "Spades"}, {value: 3, suit: "Clubs"}, {value: 3, suit: "Diamonds"}, {value: 3, suit: "Hearts"}, {value: 3, suit: "Spades"}, {value: 2, suit: "Clubs"}, {value: 2, suit: "Diamonds"}, {value: 2, suit: "Hearts"}, {value: 2, suit: "Spades"}];
+
+document.getElementById("m2").innerHTML = "Your random card objects are: ";
+
+var i = 0;
+while (i != 5) { 
+i++;    
+var x = Math.floor(Math.random() * 49);
+        document.getElementById("message").innerHTML = "Object 1: " +  JSON.stringify(cards[x]);
+    x = Math.floor(Math.random() * 49);
+        document.getElementById("message2").innerHTML = "Object 2: " +  JSON.stringify(cards[x]);
+    x = Math.floor(Math.random() * 49);
+        document.getElementById("message3").innerHTML = "Object 3: " +  JSON.stringify(cards[x]);
+    x = Math.floor(Math.random() * 49);
+        document.getElementById("message4").innerHTML = "Object 4: " +  JSON.stringify(cards[x]);
+    x = Math.floor(Math.random() * 49);
+        document.getElementById("message5").innerHTML = "Object 5: " +  JSON.stringify(cards[x]);
+    x = Math.floor(Math.random() * 49); }
+    return false; } 
+    
+</script>
+</body>
+</html> 
