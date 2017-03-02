@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </head>
+    <style>
+        .highlight {background-color: red; }
+        .over {
+            background-color: orange;
+        }
+        .selected {
+            background-color: green;
+        }
+    </style>
+    <button type="button" id="btn1">All</button> <button type="button" id="btn2">Slytherin</button> <button type="button" id="btn4">Gryffindor</button>
+    <button type="button" id="btn6">Ravenclaw</button> 
+    <button type="button" id="btn7">Hufflepuff</button> <button type="button" id="btn3">Hide</button> 
+
+
+    <body>
+        <p> Click a button to do various actions.</p>
+        <div id="buttons"></div>
+     <table border='1' id="bord"><tr><th id="name"><h3>Name: </h3><hr> </th><th id="role"><h3>Role:</h3><hr></th><th id="house"><h3> House</h3><hr></th><th id="gender"><h3>Gender:</h3> <hr></th><th id="aligns"><h3>Aligns:</h3><hr></th> </tr>  </table>
+    </body>
+        
+        <script>
+        var characters = [
+        {name:"Albus Dumbledore", role:"staff", house:"Gryffindor",gender:"m",alignment:"good"},    
+        {name:"Nymphadora Tonks", role:"", house:"Hufflepuff",gender:"f",alignment:"good"},    
+        {name:"Ron Weasley", role:"student", house:"Gryffindor",gender:"m",alignment:"good"},    
+        {name:"Ginny Weasley", role:"student", house:"Gryffindor",gender:"f",alignment:"good"},    
+        {name:"Hermione Granger", role:"student", house:"Gryffindor",gender:"f",alignment:"good"},    
+        {name:"Mad-eye Moody", role:"staff", house:"",gender:"m",alignment:"good"},    
+        {name:"Prof McGonagall", role:"staff", house:"Gryffindor",gender:"f",alignment:"good"},    
+        {name:"Harry Potter", role:"student", house:"Gryffindor",gender:"m",alignment:"good"},    
+        {name:"Draco Malfoy", role:"student", house:"Slytherin",gender:"m",alignment:"evil"},    
+        {name:"Hagrid", role:"staff", house:"Gryffindor",gender:"m",alignment:"good"},    
+        {name:"Luna Lovegood", role:"student", house:"Ravenclaw",gender:"f",alignment:"good"},    
+        {name:"Voldemort", role:"", house:"Slytherin",gender:"m",alignment:"evil"},    
+        {name:"Bellatrix Lestrange", role:"", house:"Slytherin",gender:"f",alignment:"evil"},           
+        {name:"Severus Snape", role:"staff", house:"Slytherin",gender:"m",alignment:"?"}
+        ];
+            
+function HamFunction(houseName) {
+            $('#controlID').click(HideFunction());
+            for (i in characters) {
+            if (characters[i].house == houseName) {
+                
+    $("#name").append("<li> " + characters[i].name + "</li> <hr> ");
+     $("#role").append("<li> " + characters[i].role  + "</li> <hr> ");
+     $("#house").append("<li> " + characters[i].house  + "</li> <hr>");
+    $("#gender").append("<li> " + characters[i].gender  + "</li> <hr>");
+    $("#aligns").append("<li> " + characters[i].alignment  + "</li> <hr>"); } }}
+            
+function HideFunction() {        
+    $("li").hide();  
+     $("hr").hide();  }
+
+function LoopFunction() {        
+    for (i in characters) {
+     $("#name").append("<li> " + characters[i].name + "</li> <hr> ");
+     $("#role").append("<li> " + characters[i].role  + "</li> <hr> ");
+     $("#house").append("<li> " + characters[i].house  + "</li> <hr>");
+    $("#gender").append("<li> " + characters[i].gender  + "</li> <hr>");
+    $("#aligns").append("<li> " + characters[i].alignment  + "</li> <hr>"); }}
+            
+$(document).ready(function(){
+    $('#controlID').click(LoopFunction());
+    
+        $("#btn1").click(function(){
+        $('#controlID').click(HideFunction());
+        $('#controlID').click(LoopFunction()); }); 
+
+        $("#btn3").click(function(){
+        $('#controlID').click(HideFunction()); }); 
+    
+        $("#btn2").click(function(){
+            HamFunction("Slytherin"); });
+            
+        $("#btn4").click(function(){
+             HamFunction("Gryffindor"); }); 
+    
+        $("#btn6").click(function(){
+            HamFunction("Ravenclaw");});
+    
+        $("#btn7").click(function(){
+            HamFunction("Hufflepuff");});   });  
+</script>
+    
+</html>
