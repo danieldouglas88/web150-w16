@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head> <title> Get the weather forecast</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+      <style> 
+    body{ width: 400px; 
+margin: 0px auto 0px auto; 
+background-color: lightgrey;}
+</style>
+</head>
+<body>
+    <h3>JSON and AJAX: Get American weather now. </h3>
+
+<form id="form1" action="#" onsubmit="validateForm(); return false;">
+  What city?: <input id="inp" type="text" name="city"><br><br>
+  Country: <strong>United States</strong><br><br>
+    <div id="message">Oi mate, Please Enter an American city.</div>  <br>
+
+
+  <button onclick="validateForm(); return false;">Check weather</button> <hr> 
+</form>
+    
+
+<h1></h1> <h2></h2>
+    <div id="q1" ></div><br>
+    <div id="q2" ></div><br>
+    <div id="q3" ></div><br>
+    <div id="q4" ></div><br>
+    <div id="q5" ></div><br>
+    <div id="q6" ></div><br>
+    <div id="q7" ></div> 
+    
+    <div id="p1" ></div><br>
+    <div id="p2" ></div><br>
+    <div id="p3" ></div><br>
+    <div id="p4" ></div><br>
+    <div id="p5" ></div><br>
+    <div id="p6" ></div><br>
+    <div id="p7" ></div> <br>
+
+    <div id="k2" ></div><br>
+    <div id="k3" ></div><br>
+    <div id="k4" ></div><br>
+    <div id="k5" ></div><br>
+    <div id="k6" ></div><br>
+    <div id="k7" ></div> <br>  
+    
+    <div id="j2" ></div><br>
+    <div id="j3" ></div><br>
+    <div id="j4" ></div><br>
+    <div id="j5" ></div><br>
+    <div id="j6" ></div><br>
+    <div id="j7" ></div> <br>
+    
+    <div id="l2" ></div><br>
+    <div id="l3" ></div><br>
+    <div id="l4" ></div><br>
+    <div id="l5" ></div><br>
+    <div id="l6" ></div><br>
+    <div id="l7" ></div> <br>
+    
+    <script>
+        
+    function kelvinToF(value) {
+  var fahrenheit = (((Number(value) - 273.15)*9)/5) + 32;
+  return fahrenheit.toFixed(2);}
+
+    </script>
+
+    
+<script>
+    
+    function validateForm() {
+        
+            var date = new Date(); var month = date.getMonth()+1; var day = date.getDate(); year = date.getFullYear();
+            var input2 = document.getElementById("inp").value;
+            var input = input2.replace(" ", "");
+            for (i in input) {
+                
+                if ( input[i] >= 0) {   
+                 $('h1').html("Sorry but your input appears to either contain digits, or is empty."); return false;} }
+        
+$.getJSON("http://api.openweathermap.org/data/2.5/weather?q=" + input + ",us&APPID=eb4ca1116c4c216a185cf3a206635c6a",function(data,status) {
+    
+    if (input.length < 1){ $('h1').html("Sorry but your input appears to either contain digits, or is empty.");}
+    
+    else {
+        
+    if (status == "success") {
+        
+      $("h1").html("");
+        $('h2').html(input2.toUpperCase() + ", USA.");  
+        $('#q1').html(JSON.stringify("City: "  + data.name));
+            $('#q2').html(JSON.stringify("Temperature: " + kelvinToF(data.main.temp)));
+                $('#q3').html(JSON.stringify("Min temperature: " + kelvinToF(data.main.temp_min)));
+                      $('#q4').html(JSON.stringify("Max temperature: " + kelvinToF(data.main.temp_max)));
+                              $('#q5').html(JSON.stringify("Humidity: " + data.main.humidity + "%"));
+                                    $('#q6').html(JSON.stringify("Date today is: " + month + "-" + day + ", " + year ));
+                                        $('#q7').html(JSON.stringify("Conditions: " + data.weather[0].main + "<img src='http://openweathermap.org/img/w/" + data.weather[0].icon + ".png'>") + "<hr>"); }
+        
+        if (status != "success") {
+            
+        $('h1').html("Sorry but it appears that there's a problem with the request."); 
+        return false;}} });
+    
+            input2 = document.getElementById("inp").value; input = input2.replace(" ", "");
+    
+                for (i in input) {
+                if ( input[i] >= 0) {
+                 $('h1').html("Sorry but your input appears to either contain digits, or is empty.");
+                          $("#p1").html(""); $("#p2").html(""); $("#p3").html(""); $("#p4").html("");  $("#p5").html(""); $("#p6").html(""); $("#p7").html("");
+                        return false; } }
+        
+$.getJSON("http://api.openweathermap.org/data/2.5/forecast?q=" + input + ",us&APPID=eb4ca1116c4c216a185cf3a206635c6a",function(data,status) {
+    
+    if (input.length < 1) { $('h1').html("Sorry but your input appears to either contain digits, or is empty."); return false;}
+    
+    else {
+        
+  if (status == "success") {
+      
+      $("h1").html("");      
+            $('#p2').html(JSON.stringify("Temperature: " + kelvinToF(data.list[0].main.temp) + " F"));  
+                $('#p3').html(JSON.stringify("Min temperature: " + kelvinToF(data.list[0].main.temp_min) + " F"));  
+                      $('#p4').html(JSON.stringify("Max temperature: " + kelvinToF(data.list[0].main.temp_max) + " F")); 
+                              $('#p5').html(JSON.stringify("Humidity: " + data.list[0].main.humidity + "%"));  
+                                    $('#p6').html(JSON.stringify("Date tomorrow: " + month + "-" + (day + 1) + ", " + year));
+                                        $('#p7').html(JSON.stringify("Conditions: " + data.list[0].weather[0].main  + "<img src='http://openweathermap.org/img/w/" +  data.list[0].weather[0].icon + ".png'>") + "<hr>"); 
+  
+              $('#k2').html(JSON.stringify("Temperature: " + kelvinToF(data.list[1].main.temp) + " F"));  
+                $('#k3').html(JSON.stringify("Min temperature: " + kelvinToF(data.list[1].main.temp_min) + " F"));  
+                      $('#k4').html(JSON.stringify("Max temperature: " + kelvinToF(data.list[1].main.temp_max) + " F")); 
+                              $('#k5').html(JSON.stringify("Humidity: " + data.list[1].main.humidity + "%"));  
+                                    $('#k6').html(JSON.stringify("Date: " + month + "-" + (day + 2) + ", " + year));
+                                        $('#k7').html(JSON.stringify("Conditions: " + data.list[1].weather[0].main  + "<img src='http://openweathermap.org/img/w/" +  data.list[1].weather[0].icon + ".png'>") + "<hr>");
+      
+                  $('#j2').html(JSON.stringify("Temperature: " + kelvinToF(data.list[2].main.temp) + " F"));  
+                $('#j3').html(JSON.stringify("Min temperature: " + kelvinToF(data.list[2].main.temp_min) + " F"));  
+                      $('#j4').html(JSON.stringify("Max temperature: " + kelvinToF(data.list[2].main.temp_max) + " F")); 
+                              $('#j5').html(JSON.stringify("Humidity: " + data.list[2].main.humidity + "%"));  
+                                    $('#j6').html(JSON.stringify("Date: " + month + "-" + (day + 3) + ", " + year));
+                                        $('#j7').html(JSON.stringify("Conditions: " + data.list[2].weather[0].main  + "<img src='http://openweathermap.org/img/w/" +  data.list[2].weather[0].icon + ".png'>") + "<hr>");  
+      
+                  $('#l2').html(JSON.stringify("Temperature: " + kelvinToF(data.list[3].main.temp) + " F"));  
+                $('#l3').html(JSON.stringify("Min temperature: " + kelvinToF(data.list[3].main.temp_min) + " F"));  
+                      $('#l4').html(JSON.stringify("Max temperature: " + kelvinToF(data.list[3].main.temp_max) + " F")); 
+                              $('#l5').html(JSON.stringify("Humidity: " + data.list[3].main.humidity + "%"));  
+                                    $('#l6').html(JSON.stringify("Date: " + month + "-" + (day + 4) + ", " + year));
+                                        $('#l7').html(JSON.stringify("Conditions: " + data.list[3].weather[0].main  + "<img src='http://openweathermap.org/img/w/" +  data.list[3].weather[0].icon + ".png'>") + "<hr>"); }}
+
+         if (status != "success") {
+        $('h1').html("Sorry but it appears that there's a problem with the request.");return false; }}); }
+    
+    </script>
+
+    
+</body>
+</html> 
